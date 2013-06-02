@@ -92,7 +92,7 @@ module Spree
           else
             includes = [{:variants => [:images,  {:option_values => :option_type}]}, {:master => :images}]
 
-            @collection = super.where(["name #{LIKE} ?", "%#{params[:q]}%"])
+            @collection = super.where(["spree_products.name #{LIKE} ?", "%#{params[:q]}%"])
             @collection = @collection.includes(includes).limit(params[:limit] || 10)
 
             tmp = super.where(["#{Variant.table_name}.sku #{LIKE} ?", "%#{params[:q]}%"])
