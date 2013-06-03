@@ -46,6 +46,7 @@ module Spree
 
     def activate(payload)
       return unless order_activatable? payload[:order]
+      return unless eligible? payload[:order]
 
       if code.present?
         event_code = payload[:coupon_code].to_s.strip.downcase
